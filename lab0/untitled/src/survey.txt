@@ -1,0 +1,8 @@
+Office Hour Preferences:
+1.Thursday all day
+2.Monday all day
+
+Values:
+I am very into Artificial General Intelligence.
+I was a civil engineer. I hope I can make an AI agent that can help designer.
+There are so many things I need to learn. But I hope this class can help me learn something about JAVA.
