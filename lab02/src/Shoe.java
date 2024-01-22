@@ -69,9 +69,9 @@ public class Shoe {
      * @return all the attributes of the shoe
      */
     public String toString(){
-    //return String.format("The type of the shoe is %s, the color is %s, the brand is %s and the size is %.1f"
-    //                , this.type, this.color, this.brand, this.size);
-        return "The type of the shoe " + type + " the color is " + color + " the brand is " + brand + " and the size is " + size +"\n";
+        return "The type of the shoe is " + type +
+                ", the color is " + color + ", the brand is " + brand +
+                " and the size is " + size +"\n";
     }
 
     /**

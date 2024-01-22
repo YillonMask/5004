@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
-
-
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -47,8 +45,12 @@ public class ShoeTest {
 
     @Test
     public void testPrint(){
-        Assertions.assertEquals("The type of the shoe is Running, the color is Grey, the brand is NewBalance and the size is 8.5", NewBalance.toString());
-        Assertions.assertEquals("The type of the shoe is Basketball, the color is Black, the brand is Nike and the size is 9.0", Nike.toString());
+        Assertions.assertEquals("The type of the shoe is Running, " +
+                "the color is Grey, the brand is NewBalance and the size is 8.5\n",
+                NewBalance.toString());
+        Assertions.assertEquals("The type of the shoe is Basketball, " +
+                "the color is Black, the brand is Nike and the size is 9.0\n",
+                Nike.toString());
     }
 
 
