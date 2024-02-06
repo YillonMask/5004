@@ -129,15 +129,29 @@ public class FractionImpl implements Fraction {
         return (double) this.nominator / this.denominator;
     }
 
-    public String toString(){
-        int gcd = gcd(this.nominator,this.denominator);
-        return String.format("%d/%d",this.getNominator() / gcd,this.getDenominator() / gcd);
+    /**
+     * Returns a string representation of the fraction in the format
+     * "numerator/denominator".
+     * The fraction is simplified by dividing both the numerator and denominator by
+     * their greatest common divisor.
+     *
+     * @return the string representation of the fraction
+     */
+    public String toString() {
+        int gcd = gcd(this.nominator, this.denominator);
+        return String.format("%d/%d", this.getNominator() / gcd, this.getDenominator() / gcd);
     }
 
-    static int gcd(int a, int b)
-    {
-        if(b == 0)
-        {
+    /**
+     * Calculates the greatest common divisor (GCD) of two integers using the
+     * Euclidean algorithm.
+     *
+     * @param a the first integer
+     * @param b the second integer
+     * @return the GCD of a and b
+     */
+    static int gcd(int a, int b) {
+        if (b == 0) {
             return a;
         }
         return gcd(b, a % b);
