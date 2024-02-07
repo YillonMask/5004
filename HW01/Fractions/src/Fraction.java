@@ -22,7 +22,7 @@ public interface Fraction extends Comparable<Fraction> {
      *
      * @return the reciprocal of the fraction
      */
-    double reciprocal();
+    Fraction reciprocal();
 
     /**
      * Adds another fraction to the current fraction.
@@ -30,7 +30,7 @@ public interface Fraction extends Comparable<Fraction> {
      * @param other the fraction to be added
      * @return the sum of the two fractions
      */
-    double add(Fraction other);
+    Fraction add(Fraction other);
 
     /**
      * Compares the current fraction with another fraction.

@@ -76,11 +76,17 @@ public class FractionImpl implements Fraction {
      * @return the reciprocal of the fraction
      */
     @Override
-    public double reciprocal() {
-        if (this.toDouble() == 0)
-            return 0.00;
-        else {
-            return (double) 1 / this.toDouble();
+    public Fraction reciprocal() throws ArithmeticException{
+        if (this.toDouble() == 0.00) {
+            throw new ArithmeticException("reciprocal of 0 is undefined");
+        } else {
+            int newNominator = this.getDenominator();
+            int newDenominator = this.getNominator();
+            if(newDenominator < 0){
+                newNominator = -newNominator;
+                newDenominator = -newDenominator;
+            }
+            return new FractionImpl(newNominator, newDenominator);
         }
     }
 
@@ -115,8 +121,11 @@ public class FractionImpl implements Fraction {
      *         value
      */
     @Override
-    public double add(Fraction other) {
-        return other.toDouble() + this.toDouble();
+    public Fraction add(Fraction other) {
+        int newNominator = this.getNominator() * other.getDenominator() + other.getNominator() * this.getDenominator();
+        int newDenominator = this.getDenominator() * other.getDenominator();
+        //int gcd = gcd(newNominator, newDenominator);
+        return new FractionImpl(newNominator, newDenominator);
     }
 
     /**

@@ -69,8 +69,23 @@ public class FractionImplTest {
      */
     @Test
     public void testReciprocal() {
-        double reciprocal = fraction.reciprocal();
-        assertEquals(4.00 / 3.00, reciprocal, 0.001);
+        Fraction reciprocal = fraction.reciprocal();
+        assertEquals(4, reciprocal.getNominator());
+        assertEquals(3, reciprocal.getDenominator());
+    }
+
+    @Test
+    public void testZeroReciprocal(){
+        Fraction zeroReciprocal = new FractionImpl(0,8);
+        assertThrows(ArithmeticException.class, zeroReciprocal::reciprocal);
+    }
+
+    @Test
+    public void testNegativeReciprocal(){
+        Fraction negative = new FractionImpl(-1,8);
+        Fraction negativeReciprocal = negative.reciprocal();
+        assertEquals(-8,negativeReciprocal.getNominator());
+        assertEquals(1,negativeReciprocal.getDenominator());
     }
 
     /**
@@ -87,9 +102,10 @@ public class FractionImplTest {
      */
     @Test
     public void testAdd() {
-        FractionImpl other = new FractionImpl(1, 4);
-        double result = fraction.add(other);
-        assertEquals(1, result, 0.001);
+        FractionImpl other = new FractionImpl(1, 3);
+        Fraction result = fraction.add(other);
+        assertEquals(13, result.getNominator());
+        assertEquals(12, result.getDenominator());
     }
 
     /**
