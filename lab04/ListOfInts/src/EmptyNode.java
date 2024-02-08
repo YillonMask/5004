@@ -23,7 +23,7 @@ public class EmptyNode implements IListOfInts {
      */
     @Override
     public IListOfInts append(int data) {
-        return append(data);
+        return new ElementNode(data, this);
     }
 
     /**
@@ -92,6 +92,6 @@ public class EmptyNode implements IListOfInts {
      */
     @Override
     public String toString() {
-        return "";
+        return "null";
     }
 }

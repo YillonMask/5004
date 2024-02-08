@@ -7,7 +7,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Constructs an ElementNode with the specified data and rest.
-     * 
+     *
      * @param data the data of the node
      * @param rest the rest of the linked list
      */
@@ -18,7 +18,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Prepends a new node with the specified data to the linked list.
-     * 
+     *
      * @param data the data to prepend
      * @return the updated linked list with the new node prepended
      */
@@ -29,7 +29,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Appends a new node with the specified data to the linked list.
-     * 
+     *
      * @param data the data to append
      * @return the updated linked list with the new node appended
      */
@@ -42,7 +42,7 @@ public class ElementNode implements IListOfInts {
     /**
      * Inserts a new node with the specified data at the specified index in the
      * linked list.
-     * 
+     *
      * @param data  the data to insert
      * @param index the index at which to insert the new node
      * @return the updated linked list with the new node inserted
@@ -59,7 +59,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Retrieves the data at the specified index in the linked list.
-     * 
+     *
      * @param index the index of the data to retrieve
      * @return the data at the specified index
      * @throws IllegalArgumentException if the index is out of bounds
@@ -75,7 +75,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Retrieves the rest of the linked list.
-     * 
+     *
      * @return the rest of the linked list
      */
     @Override
@@ -85,7 +85,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Retrieves the number of nodes in the linked list.
-     * 
+     *
      * @return the number of nodes in the linked list
      */
     @Override
@@ -95,7 +95,7 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Retrieves the sum of all the data in the linked list.
-     * 
+     *
      * @return the sum of all the data in the linked list
      */
     @Override
@@ -105,11 +105,11 @@ public class ElementNode implements IListOfInts {
 
     /**
      * Returns a string representation of the linked list.
-     * 
+     *
      * @return a string representation of the linked list
      */
     @Override
     public String toString() {
-        return "(" + this.data + ")";
+        return this.data + " -> " + this.rest.toString();
     }
 }

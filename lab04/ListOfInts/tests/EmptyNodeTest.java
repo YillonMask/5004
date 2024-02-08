@@ -15,13 +15,13 @@ public class EmptyNodeTest {
     @Test
     public void testPrepend() {
         IListOfInts updatedList = emptyNode.prepend(5);
-        assertEquals("5", updatedList.toString());
+        assertEquals("5 -> null", updatedList.toString());
     }
 
     @Test
     public void testAppend() {
         IListOfInts updatedList = emptyNode.append(10);
-        assertEquals("10", updatedList.toString());
+        assertEquals("10 -> null", updatedList.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -54,6 +54,6 @@ public class EmptyNodeTest {
     @Test
     public void testToString() {
         String str = emptyNode.toString();
-        assertEquals("", str);
+        assertEquals("null", str);
     }
 }
