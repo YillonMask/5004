@@ -14,6 +14,11 @@ public class ShapeDemo {
 
     // Sort shapes based on area (using Comparable)
     Collections.sort(shapes);
+    /**
+     * P3: if we want to sort the shapes based on its perimeter
+     * we can just modify the compareTo() method
+     * change it to perimeter90 instead of area()
+     */
 
     // Print the sorted list by area
     System.out.println("Sorted by area:");
@@ -22,7 +27,13 @@ public class ShapeDemo {
     }
 
     // Sort shapes based on perimeter (using Comparator)
-    //Collections.sort(shapes, new PerimeterComparator());
+    Collections.sort(shapes, new PerimeterComparator());
+    /**
+     * Since we are going to use Comparator to sort the shape
+     * base on its perimeter. We should create a new class named PerimeterComparator
+     * which implements Comparator<T>. and inside the class we have to Override
+     * the method by comparing the shape according to its perimeter.
+     */
 
     // Print the sorted list by perimeter
     System.out.println("\nSorted by perimeter:");
