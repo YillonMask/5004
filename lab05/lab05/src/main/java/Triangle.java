@@ -80,9 +80,11 @@ public class Triangle extends AbstractShape {
      * @return a new Triangle object with the resized dimensions
      */
     @Override
-    public Shape resize(double factor) {
+    public Shape resize(double factor) throws IllegalArgumentException {
+        if(factor <= 0){
+            throw new IllegalArgumentException("The resize factor should greater than 0");
+        }
         double sqrtFactor = Math.sqrt(factor);
-
         double new_x1 = reference.getX() + sqrtFactor * (x1 - reference.getX());
         double new_y1 = reference.getY() + sqrtFactor * (y1 - reference.getY());
         double new_x2 = reference.getX() + sqrtFactor * (x2 - reference.getX());

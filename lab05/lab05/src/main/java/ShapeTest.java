@@ -88,7 +88,7 @@ public class ShapeTest {
   @Test
   public void testResizes() {
     Shape resizedCircle1, resizedCircle2, resizedCircle3, resizedRect1,
-        resizedRect2, resizedTrian1, resizedTrian2;
+        resizedRect2, resizedTrian1;
 
     resizedCircle1 = circle1.resize(2.5);
     resizedCircle2 = circle2.resize(0);
@@ -96,13 +96,17 @@ public class ShapeTest {
     resizedRect1 = rect1.resize(12.5);
     resizedRect2 = rect2.resize(0.001);
     resizedTrian1 = trian1.resize(8.9);
-
+    //throws exception when resize factor is 0 for a triangle
+    assertThrows(IllegalArgumentException.class, () -> {
+      Shape resizedTrian2 = trian2.resize((0));
+    });
     assertEquals(2.5 * circle1.area(), resizedCircle1.area(), 0.001);
     assertEquals(0 * circle2.area(), resizedCircle2.area(), 0.001);
     assertEquals(10 * circle3.area(), resizedCircle3.area(), 0.001);
     assertEquals(12.5 * rect1.area(), resizedRect1.area(), 0.001);
     assertEquals(0.001 * rect2.area(), resizedRect2.area(), 0.001);
     assertEquals(8.9 * trian1.area(), resizedTrian1.area(), 0.001);
+
   }
 
 }
