@@ -17,7 +17,7 @@ public class ShapeDemo {
     /**
      * P3: if we want to sort the shapes based on its perimeter
      * we can just modify the compareTo() method
-     * change it to perimeter90 instead of area()
+     * change it to perimeter() instead of area()
      */
 
     // Print the sorted list by area
