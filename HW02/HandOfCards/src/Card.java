@@ -5,86 +5,23 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-public class Card<C> implements Hand<C> {
+
+/**
+ * Class to represent a Card. A card has a suit and a rank
+ * @param <C>
+ */
+public class Card<C> implements Comparable<Card> {
     private final List<C> cards = new ArrayList<>();
-
-    @Override
-    public void initializeHand() {
-        cards.clear();
-    }
-
-    @Override
-    public void add(C c) {
-        cards.add(0, c); // Adds to the "front" of the Hand.
-    }
-
-    @Override
-    public void discard(int index) {
-        if (index >= 0 && index < cards.size()) {
-            cards.remove(index);
-        } else {
-            throw new IndexOutOfBoundsException("Invalid index: " + index);
-        }
-    }
-
-    @Override
-    public C get(int index) {
-        if (index >= 0 && index < cards.size()) {
-            return cards.get(index);
-        } else {
-            throw new IndexOutOfBoundsException("Invalid index: " + index);
-        }
-    }
-
-    @Override
-    public int getSize() {
-        return cards.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return cards.isEmpty();
-    }
-
-    @Override
-    public int find(C c) {
-        return cards.indexOf(c);
-    }
-
-    @Override
-    public void sortHand(Comparator<? super C> comparator) {
-        Collections.sort(cards, comparator);
-    }
-    @Override
-    public Hand<C> getHand(Predicate<? super C> filter) {
-        Hand<C> filteredHand = new Card<>();
-        this.cards.stream()
-                .filter(filter)
-                .forEach(filteredHand::add);
-        return filteredHand;
-    }
-
-    @Override
-    public int rankSum() {
-        // This assumes that C type has a method getRank() that returns an int.
-        return this.cards.stream()
-                .mapToInt(Card::getRank)
-                .sum();
-    }
-
-    @Override
-    public <R> Hand<R> getMap(Function<? super C, ? extends R> mapper) {
-        Hand<R> mappedHand = new Card<>();
-        this.cards.stream()
-                .map(mapper)
-                .forEach(mappedHand::add);
-        return mappedHand;
-    }
-
     private final Suit suit;
-    private final Integer rank;
+    private final int rank;
 
-    public Card(Suit suit, Integer rank) {
+    /**
+     * Constructor for a Card
+     *
+     * @param suit
+     * @param rank
+     */
+    public Card(Suit suit, int rank) {
         if (rank < 1 || rank > 13) {
             throw new IllegalArgumentException("Rank must be between 1 and 13");
         }
@@ -92,42 +29,77 @@ public class Card<C> implements Hand<C> {
         this.rank = rank;
     }
 
+    /**
+     * Method to get the suit of the card
+     *
+     * @return suit
+     */
     public Suit getSuit() {
         return suit;
     }
 
-    public Integer getRank() {
+    /**
+     * Method to get the rank of the card
+     *
+     * @return rank
+     */
+    public int getRank() {
         return rank;
     }
 
-    public color getColor() {
+    /**
+     * Method to get the color of the card
+     * if the card is a diamond or heart, it is red otherwise it is black
+     *
+     * @return color as an Enum
+     */
+    public Enum getColor() {
         return (suit == Suit.DIAMONDS || suit == Suit.HEARTS) ? color.RED : color.BLACK;
     }
 
+
+    /**
+     * Method to return a string representation of the Card
+     * @return String
+     */
+
     @Override
     public String toString() {
-        return "Card{" +
-                "suit=" + suit +
-                ", rank=" + rank +
-                '}';
+        String[] ranks = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+        return ranks[rank - 1] + " of " + suit.toString();
     }
 
+    /**
+     * Method to check if two Cards are equal
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Card)) return false;
         Card card = (Card) o;
-        return suit == card.suit && rank.equals(card.rank);
+        return suit == card.suit && rank == card.rank;
     }
+
+    /**
+     * Method to return the hashcode of the Card
+     * @return int
+     */
 
     @Override
     public int hashCode() {
-        return 31 * suit.hashCode() + rank.hashCode();
+        return 31 * suit.hashCode() + rank;
     }
 
+    /**
+     * Method to compare two Cards based on their rank
+     * @param other
+     * @return int
+     */
     @Override
     public int compareTo(Card other) {
-        return this.rank.compareTo(other.rank);
+        return Integer.compare(rank, other.rank);
     }
 }
 
