@@ -81,4 +81,5 @@ public interface Hand<C> {
      * @param <T>
      */
     <T> Hand<T> getMap(Function<C, T> function);
+
 }

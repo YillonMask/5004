@@ -101,5 +101,6 @@ public class Card<C> implements Comparable<Card> {
     public int compareTo(Card other) {
         return Integer.compare(rank, other.rank);
     }
+
 }
 

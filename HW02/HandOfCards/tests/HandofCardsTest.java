@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
 
@@ -63,6 +64,9 @@ public class HandofCardsTest {
         assertFalse(hand.isEmpty());
     }
 
+    /**
+     * Test the sorting method using compareTo method
+     */
     @Test
     public void testSortBasedOnRankUsingCompareTo() {
         handList= new ArrayList<>();
@@ -80,6 +84,10 @@ public class HandofCardsTest {
         assertEquals(card2, handList.get(1));
         assertEquals(card1, handList.get(0));
     }
+
+    /**
+     * Test the sorting method using a Comparator
+     */
 
     @Test
     public void testSortBasedOnSuitComparator() {
@@ -109,29 +117,96 @@ public class HandofCardsTest {
         assertEquals(expected, hand.toString());
     }
 
+    /**
+     * Test the getHand method using a single method
+     */
     @Test
-    public void getHandReturnsFilteredHand() {
+    public void testGetHandUsingSingleMethod(){
+        int rank = 5;
         hand.add(card1);
         hand.add(card2);
-        Hand<Card> filteredHand = hand.getHand(card -> card.getRank() > 1);
-        assertEquals(1, filteredHand.getSize());
-        assertEquals(card2, filteredHand.get(0));
+    Hand<Card> filteredHand = hand.getHand(new RankGreaterThan(rank));
+        String expected = card2.toString() + "\n";
+        assertEquals(expected, filteredHand.toString());
     }
+
+    /**
+     * Test the getHand method using a lambda expression
+     */
+    @Test
+    public void testGetHandUsingLambdaExpression() {
+        int rank = 5;
+        hand.add(card1);
+        hand.add(card2);
+        Hand<Card> filteredHand = hand.getHand(card -> card.getRank() > rank);
+        String expected = card2.toString() + "\n";
+        assertEquals(expected, filteredHand.toString());
+    }
+
+    /**
+     * Test the getHand method using an anonymous class
+     */
+    @Test
+    public void testGetHandUsingAnonymousClass() {
+        int rank = 5;
+        hand.add(card1);
+        hand.add(card2);
+        Hand<Card> filteredHand = hand.getHand(
+                new Predicate<Card>(){
+                    @Override
+                    public boolean test(Card card) {
+                        return card.getRank() > rank;
+                    }
+                });
+        String expected = card2.toString() + "\n";
+        assertEquals(expected, filteredHand.toString());
+    }
+
+    /**
+     * Test the rankSum method
+     */
 
     @Test
     public void rankSumReturnsCorrectSum() {
         hand.add(card1);
         hand.add(card2);
-        assertEquals(3, hand.rankSum());
+        assertEquals(13, hand.rankSum());
+        hand.add(card3);
+        assertEquals(22, hand.rankSum());
+        assertEquals(0, emptyHand.rankSum());
     }
 
+    /**
+     * Test the getMap method based on Suit
+     */
+
     @Test
-    public void getMapReturnsMappedHand() {
+    public void testGetMapBasedOnSuit() {
         hand.add(card1);
         hand.add(card2);
-        //Hand<Card> mappedHand = hand.getMap(Card::getSuit);
-        //assertEquals(card1, mappedHand.get(0));
-        //assertEquals(card1, mappedHand.get(1));
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Suit> mappedHand = hand.getMap(Card->Card.getSuit());
+        for(int i = 0; i < hand.getSize();i++){
+            assertEquals(hand.get(i).getSuit(),mappedHand.get(i));
+        }
+    }
+
+    /**
+     * Test the getMap method based on Rank
+     */
+    @Test
+      public void testGetMapBasedOnRank() {
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Integer> mappedHand = hand.getMap(Card -> Card.getRank());
+        for (int i = 0; i < hand.getSize(); i++) {
+          assertEquals(hand.get(i).getRank(), (int) mappedHand.get(i));
+        }
     }
 
 }
