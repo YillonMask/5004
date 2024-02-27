@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
@@ -138,8 +139,9 @@ public class HandofCardsTest {
         int rank = 5;
         hand.add(card1);
         hand.add(card2);
-        Hand<Card> filteredHand = hand.getHand(card -> card.getRank() > rank);
-        String expected = card2.toString() + "\n";
+        hand.add(card3);
+        Hand<Card> filteredHand = hand.getHand(card -> card.getRank() > rank && card.getSuit() == Suit.CLUBS);
+        String expected = card3.toString() + "\n";
         assertEquals(expected, filteredHand.toString());
     }
 
@@ -177,7 +179,7 @@ public class HandofCardsTest {
     }
 
     /**
-     * Test the getMap method based on Suit
+     * Test the getMap method based on Suit using a lambda expression
      */
 
     @Test
@@ -194,7 +196,44 @@ public class HandofCardsTest {
     }
 
     /**
-     * Test the getMap method based on Rank
+     * Test the getMap method based on Suit using an anonymous class
+     */
+    @Test
+    public void testGetMapBasedOnSuitUsingAnonymousClass() {
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Suit> mappedHand = hand.getMap(new Function<Card, Suit>() {
+            @Override
+            public Suit apply(Card card) {
+                return card.getSuit();
+            }
+        });
+        for (int i = 0; i < hand.getSize(); i++) {
+            assertEquals(hand.get(i).getSuit(), mappedHand.get(i));
+        }
+    }
+
+    /**
+     * Test the getMap method based on Suit using a single method
+     */
+    @Test
+    public void testGetMapBasedOnSuitUsingSingleMethod() {
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Suit> mappedHand = hand.getMap(new SuitMapper());
+        for (int i = 0; i < hand.getSize(); i++) {
+            assertEquals(hand.get(i).getSuit(), mappedHand.get(i));
+        }
+    }
+
+    /**
+     * Test the getMap method based on Rank using a Lambda expression
      */
     @Test
       public void testGetMapBasedOnRank() {
@@ -206,6 +245,40 @@ public class HandofCardsTest {
         Hand<Integer> mappedHand = hand.getMap(Card -> Card.getRank());
         for (int i = 0; i < hand.getSize(); i++) {
           assertEquals(hand.get(i).getRank(), (int) mappedHand.get(i));
+        }
+    }
+
+    /**
+     * Test the getMap method based on Rank using an anonymous class
+     */
+    @Test
+    public void testGetMapBasedOnRankUsingAnonymousClass(){
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Integer> mappedHand = hand.getMap(new Function<Card,Integer>(){
+            @Override
+            public Integer apply(Card card){
+                return card.getRank();
+            }
+        });
+    }
+
+    /**
+     * Test the getMap method based on Rank using a single method
+     */
+    @Test
+    public void testGetMapBasedOnRankUsingSingleMethod(){
+        hand.add(card1);
+        hand.add(card2);
+        hand.add(card3);
+        hand.add(card4);
+        hand.add(card5);
+        Hand<Integer> mappedHand = hand.getMap(new RankMapper());
+        for (int i = 0; i < hand.getSize(); i++) {
+            assertEquals(hand.get(i).getRank(), (int) mappedHand.get(i));
         }
     }
 
