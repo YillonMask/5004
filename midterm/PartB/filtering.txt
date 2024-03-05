@@ -1,0 +1,1 @@
+Part2.List<PetMammal> aquaticPets = filterPets(pets, pet -> pet.isLandBased()&&pet.getOwner() != “John Doe”);a.Lambda Expressionb.Anonymous class
