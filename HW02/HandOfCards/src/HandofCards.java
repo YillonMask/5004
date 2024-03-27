@@ -131,7 +131,7 @@ class HandofCards<C> implements Hand<C>{
 
     /**
      * Method to map the Hand to another type based on a Function
-     * accepts a higher-order Function as a argument and returns a new Hand
+     * accepts a higher-order Function as an argument and returns a new Hand
      * containing the items that have been transformed by the Function
      *
      * @param function
