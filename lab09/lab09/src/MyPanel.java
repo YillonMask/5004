@@ -12,8 +12,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * MyPanel class extends JPanel and implements ActionListener and KeyListener.
+ * It represents a panel with a snake game.
+ */
 public class MyPanel extends JPanel implements ActionListener, KeyListener {
 
+    /**
+     * Constructor for MyPanel.
+     * It initializes the panel with the snake game.
+     * It sets the initial direction of the snake, starts the timer and register the keyboard event listener.
+     */
   public MyPanel() {
     // make the panel focusable so that it can react to keyboard inputs
     this.setFocusable(true);
@@ -52,10 +61,15 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     // Every time it fires, we update the apple's location and repaint it.
     new Timer(200, this).start();
 
-    // register ourself as the keyboard event listner.
+    // register ourself as the keyboard event listener.
     this.addKeyListener(this);
   }
 
+  /**
+   * Paints the components of the panel.
+   * It paints the apple, snake head and snake body.
+   * @param g the graphics object
+   */
   @Override
   protected void paintComponent(Graphics g) {
     System.out.println("repainting");
@@ -72,6 +86,12 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     }
   }
 
+  /**
+   * Action performed method.
+   * It is called every time the alarm fires.
+   * It updates the snake's location and repaints the panel.
+   * @param e the action event
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     System.out.println("alarm fired");
@@ -121,6 +141,11 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     repaint();
   }
 
+  /**
+   * Regenerates the apple's location.
+   * It generates a random location within the panel
+   * and rounds it to the nearest dot size.
+   */
   private void regenApple() {
     // Random location within the panel.
     int new_x = rnd.nextInt(400);
@@ -129,11 +154,24 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     apple_loc = new Coordinate((new_x / dot_size) * dot_size, (new_y / dot_size) * dot_size);
   }
 
+  /**
+   * Key typed method.
+   * It is called when a key is typed.
+   * keyTyped method is part of the keyListener interface.
+   * it needs to provide an implementation, but we don't need it.
+   * @param e the key event
+   */
   @Override
   public void keyTyped(KeyEvent e) {
     // do nothing
   }
 
+  /**
+   * Key pressed method.
+   * It is called when a key is pressed.
+   * It sets the direction of the snake based on the direction key pressed.
+   * @param e the key event
+   */
   @Override
   public void keyPressed(KeyEvent e) {
     int keyCode = e.getKeyCode();
@@ -152,6 +190,13 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     }
   }
 
+  /**
+   * Key released method.
+   * It is called when a key is released.
+   * keyReleased method is part of the keyListener interface.
+   * it needs to provide an implementation, but we don't need it.
+   * @param e the key event
+   */
   @Override
   public void keyReleased(KeyEvent e) {
     // do nothing
