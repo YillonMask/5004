@@ -47,15 +47,25 @@ public class MyPanel extends JPanel implements ActionListener, KeyListener {
     // The list head is the snake head.
     // Assume the radius of each dot is 10.
     snake_loc = new ArrayList<>();
-    snake_loc.add(new Coordinate(50, 50));
-    snake_loc.add(new Coordinate(50 + dot_size, 50));
-    snake_loc.add(new Coordinate(50 + 2 * dot_size, 50));
+    /**
+     * Possible future improvement No.2
+     * Randomize the starting location of the snake
+     * Randomize the starting direction of the snake
+     */
+    int snake_loc_x = rnd.nextInt(400);
+    int snake_loc_y = rnd.nextInt(400);
+    snake_loc_x = (snake_loc_x / dot_size) * dot_size;
+    snake_loc_y = (snake_loc_y / dot_size) * dot_size;
+    snake_loc.add(new Coordinate(snake_loc_x, snake_loc_y));
+    snake_loc.add(new Coordinate(snake_loc_x , snake_loc_y+ dot_size));
+    snake_loc.add(new Coordinate(snake_loc_x , snake_loc_y+ 2 * dot_size));
 
     // 1 - up
     // 2 - down
     // 3 - left
     // 4 - right
-    direction = 1;
+    int randomDirection = rnd.nextInt(4) + 1;
+    direction = randomDirection;
 
     // set up the alarm, which fires periodically (16 ms == 60fps).
     // Every time it fires, we update the apple's location and repaint it.
