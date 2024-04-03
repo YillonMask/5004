@@ -16,6 +16,16 @@ public class Coordinate {
   int y;
 
   /**
+   * Possible future improvement No.3
+   * add the hashcode method to generate a hashcode for the coordinate
+   * Hashcode method to generate a hashcode for the coordinate.
+   * @return the hashcode
+   */
+  @Override
+    public int hashCode() {
+        return x * 31 + y;
+    }
+  /**
    * Equals method to compare two coordinates.
    * @param obj the object to compare
    * @return true if the coordinates are equal, false otherwise
