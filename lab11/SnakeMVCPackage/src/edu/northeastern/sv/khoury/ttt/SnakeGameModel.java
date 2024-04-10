@@ -1,4 +1,7 @@
+package edu.northeastern.sv.khoury.ttt;
+
 import java.util.List;
+
 public class SnakeGameModel implements GameModel{
     private Coordinate apple_loc;
     private List<Coordinate> snake_loc;
